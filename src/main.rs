@@ -21,9 +21,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     let client = SignerMiddleware::new(provider.clone(), wallet.clone());
 
-    execute::mint(&client).await?;
-    execute::balance_of(&client).await?;   
-    execute::safe_tranfer_from(&client).await?;
+
+    let _to =  "0xA83e88525eAaA73bC831455A2A6b41F88eEC1e75".parse::<Address>().unwrap();
+    let _tokenid = U256::from(6);
+    let _url  = "https://ipfs.io/ipfs/bafybeihzn4wkezoa35g7wwl3kxk6tr2i34jvfx2esqn4tpdx5iwm52c2vm/6.json".to_string();
+    execute::mint(&client,_to,_tokenid,_url).await?;
+
+
+    let _owner =  "0xA83e88525eAaA73bC831455A2A6b41F88eEC1e75".parse::<Address>().unwrap();
+    execute::balance_of(&client,_owner).await?;   
+
+
+    let _from =  "0xA83e88525eAaA73bC831455A2A6b41F88eEC1e75".parse::<Address>().unwrap();
+    let _to =  "0xcf41E8a906bFc1b8eB8ABE6e073353b942a5d363".parse::<Address>().unwrap();
+    let _tokenid = U256::from(2);
+    execute::safe_tranfer_from(&client,_from,_to,_tokenid).await?;
 
 
     Ok(())
