@@ -4,7 +4,7 @@
  * @Author: Mindy
  * @Date: 2023-06-15 15:21:53
  */
-use ethers::{prelude::*, utils::Anvil};
+use ethers::{prelude::*};
 use rust_eth_demo::execute;
 
 
@@ -22,6 +22,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = SignerMiddleware::new(provider.clone(), wallet.clone());
 
     execute::mint(&client).await?;
+    execute::balance_of(&client).await?;   
+    execute::safe_tranfer_from(&client).await?;
+
 
     Ok(())
 }
